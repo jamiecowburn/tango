@@ -1,75 +1,80 @@
 const WORDS = [
   {
-    topic: "colours of the rainbow: red",
-    answer: "あか",
-    english: "red",
+    topic: "pointing words: this",
+    answer: "これ",
+    english: "this",
     level: "Beginner",
-    real: true,
-    note: "A common Japanese word for red."
+    note: "A common word used for something near the speaker."
   },
   {
-    topic: "colours of the rainbow: blue",
-    answer: "あお",
-    english: "blue",
+    topic: "pointing words: that",
+    answer: "それ",
+    english: "that",
     level: "Beginner",
-    real: true,
-    note: "A common Japanese word for blue."
+    note: "A common word used for something near the listener."
   },
   {
-    topic: "animals: cat",
-    answer: "ねこ",
-    english: "cat",
+    topic: "question words: what",
+    answer: "なに",
+    english: "what",
     level: "Beginner",
-    real: true,
-    note: "A common Japanese word for cat."
+    note: "Also pronounced なん in some phrases."
   },
   {
-    topic: "food: sushi",
-    answer: "すし",
-    english: "sushi",
+    topic: "question words: who",
+    answer: "だれ",
+    english: "who",
     level: "Beginner",
-    real: true,
-    note: "Usually written as すし or 寿司."
+    note: "A common question word for asking about people."
   },
   {
-    topic: "weather: rain",
-    answer: "あめ",
-    english: "rain",
+    topic: "responses: yes",
+    answer: "はい",
+    english: "yes",
     level: "Beginner",
-    real: true,
-    note: "あめ can also mean candy depending on context."
+    note: "A common polite yes or acknowledgement."
   },
   {
-    topic: "school: teacher",
-    answer: "せんせい",
-    english: "teacher",
+    topic: "responses: no",
+    answer: "いいえ",
+    english: "no",
     level: "Beginner",
-    real: true,
-    note: "Often used for teachers, doctors, and instructors."
+    note: "A common polite no."
   },
   {
-    topic: "feelings: exciting",
-    answer: "わくわく",
-    english: "excited",
+    topic: "time words: not yet",
+    answer: "まだ",
+    english: "not yet",
     level: "Intermediate",
-    real: true,
-    note: "A mimetic word for excited anticipation."
+    note: "Can also mean still, depending on the sentence."
   },
   {
-    topic: "practice sounds: made-up word using ka, sa, and ta rows",
-    answer: "かさたな",
-    english: "sound pattern",
-    level: "Practice",
-    real: false,
-    note: "This is not a natural Japanese word. It is a kana pattern for practice."
+    topic: "describing words: very",
+    answer: "とても",
+    english: "very",
+    level: "Intermediate",
+    note: "Often used before adjectives."
   },
   {
-    topic: "advanced colour: purple",
-    answer: "むらさき",
-    english: "purple",
-    level: "Advanced",
-    real: true,
-    note: "A common word for purple."
+    topic: "greetings: hello",
+    answer: "こんにちは",
+    english: "hello",
+    level: "Beginner",
+    note: "A daytime greeting. The final は is pronounced wa."
+  },
+  {
+    topic: "polite phrases: thank you",
+    answer: "ありがとう",
+    english: "thank you",
+    level: "Beginner",
+    note: "A common casual thank-you."
+  },
+  {
+    topic: "polite phrases: excuse me",
+    answer: "すみません",
+    english: "excuse me",
+    level: "Beginner",
+    note: "Also used for sorry or to get someone's attention."
   }
 ];
 
