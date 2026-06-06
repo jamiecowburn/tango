@@ -118,7 +118,7 @@ function newPuzzle(index = Math.floor(Math.random() * WORDS.length)) {
   gameOver = false;
   kanaStates = new Map();
   render();
-  setMessage(puzzle.real ? puzzle.note : `Practice alert: ${puzzle.note}`);
+  setMessage("Pick hiragana to build your guess.");
 }
 
 function render() {
@@ -226,7 +226,7 @@ function submitGuess() {
     setMessage(`Correct: ${puzzle.answer} means ${puzzle.english}. ${puzzle.note}`);
   } else if (currentRow === ATTEMPTS) {
     gameOver = true;
-    setMessage(`Answer: ${puzzle.answer} means ${puzzle.english}. ${puzzle.note}`);
+    setMessage("Round finished. Start a new topic to keep practicing.");
   } else {
     selectedCol = 0;
     setMessage("Try again.");
