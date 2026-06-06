@@ -221,6 +221,7 @@ const chartGrid = document.querySelector("#chartGrid");
 const submitButton = document.querySelector("#submitButton");
 const clearButton = document.querySelector("#clearButton");
 const newButton = document.querySelector("#newButton");
+const shareButton = document.querySelector("#shareButton");
 const helpButton = document.querySelector("#helpButton");
 const helpDialog = document.querySelector("#helpDialog");
 
@@ -275,6 +276,7 @@ function newPuzzle(index = Math.floor(Math.random() * currentWords().length)) {
   guesses = Array.from({ length: ATTEMPTS }, () => Array(characters(puzzle.answer).length).fill(""));
   gameOver = false;
   kanaStates = new Map();
+  hideShareButton();
   render();
   setMessage(currentSet().prompt);
 }
@@ -397,9 +399,11 @@ function submitGuess() {
   if (won) {
     gameOver = true;
     setMessage(`Correct: ${puzzle.answer} means ${puzzle.english}. ${puzzle.note}`);
+    showShareButton(true);
   } else if (currentRow === ATTEMPTS) {
     gameOver = true;
     setMessage("Round finished. Start a new topic to keep practicing.");
+    showShareButton(false);
   } else {
     selectedCol = 0;
     setMessage("Try again.");
@@ -431,6 +435,33 @@ function setMessage(text) {
   message.textContent = text;
 }
 
+function generateShareText(won) {
+  const answer = characters(puzzle.answer);
+  const totalAttempts = currentRow;
+  const score = won ? String(totalAttempts) : "X";
+  const header = `Tango — ${puzzle.english} (${currentSet().title})\n${score}/${ATTEMPTS}`;
+
+  const rows = guesses.slice(0, totalAttempts).map((guess) => {
+    return guess.map((kana, colIndex) => {
+      if (kana === answer[colIndex]) return "🟩";
+      if (answer.includes(kana)) return "🟨";
+      return "⬜";
+    }).join("");
+  });
+
+  return `${header}\n\n${rows.join("\n")}`;
+}
+
+function showShareButton(won) {
+  shareButton.hidden = false;
+  shareButton.dataset.won = won ? "1" : "0";
+}
+
+function hideShareButton() {
+  shareButton.hidden = true;
+  shareButton.textContent = "Share 📋";
+}
+
 populateAlphabetSelect();
 populateTopicSelect();
 
@@ -447,6 +478,38 @@ submitButton.addEventListener("click", submitGuess);
 clearButton.addEventListener("click", clearRow);
 newButton.addEventListener("click", () => newPuzzle((puzzleIndex + 1) % currentWords().length));
 helpButton.addEventListener("click", () => helpDialog.showModal());
+
+shareButton.addEventListener("click", () => {
+  const won = shareButton.dataset.won === "1";
+  const text = generateShareText(won);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      shareButton.textContent = "Copied! ✓";
+      setTimeout(() => { shareButton.textContent = "Share 📋"; }, 2200);
+    }).catch(() => {
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
+});
+
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+    shareButton.textContent = "Copied! ✓";
+    setTimeout(() => { shareButton.textContent = "Share 📋"; }, 2200);
+  } catch (e) {
+    shareButton.textContent = "Copy failed";
+  }
+  document.body.removeChild(ta);
+}
 
 document.addEventListener("keydown", (event) => {
   if (gameOver) return;

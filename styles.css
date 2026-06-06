@@ -228,6 +228,49 @@ select {
   gap: 9px;
 }
 
+.share-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  min-height: 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 22px;
+  min-height: 42px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: var(--ink);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: background 140ms ease, transform 100ms ease, opacity 140ms ease;
+  animation: share-pop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.share-btn:hover {
+  background: #333d42;
+}
+
+.share-btn:active {
+  transform: scale(0.96);
+}
+
+.share-btn[hidden] {
+  display: none;
+}
+
+@keyframes share-pop {
+  from { opacity: 0; transform: scale(0.88) translateY(4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 .primary,
 .secondary {
   min-height: 46px;
