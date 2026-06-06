@@ -32,7 +32,7 @@ button {
 }
 
 .app-shell {
-  width: min(720px, calc(100% - 28px));
+  width: min(1080px, calc(100% - 28px));
   margin: 0 auto;
   padding: 22px 0 34px;
 }
@@ -72,6 +72,7 @@ h1 {
   cursor: pointer;
 }
 
+.setup-panel,
 .status-panel,
 .picker-panel {
   margin-top: 18px;
@@ -79,6 +80,56 @@ h1 {
   border: 2px solid var(--line);
   border-radius: 8px;
   padding: 14px;
+}
+
+.setup-panel {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(220px, 1.6fr) auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.setup-panel label {
+  display: grid;
+  gap: 6px;
+}
+
+select {
+  width: 100%;
+  min-height: 42px;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  padding: 0 10px;
+}
+
+.chart-switch {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.chart-switch input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.play-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 18px;
+}
+
+.game-column {
+  min-width: 0;
 }
 
 .topic {
@@ -268,6 +319,57 @@ h1 {
   color: #455054;
 }
 
+.chart-panel {
+  position: sticky;
+  top: 14px;
+  margin-top: 18px;
+  background: #f8fbff;
+  border: 2px solid #b9c7d6;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.chart-panel[hidden] {
+  display: none;
+}
+
+.chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.chart-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.chart-cell {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #cdd7e2;
+  border-radius: 5px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.chart-cell.empty {
+  background: transparent;
+  border-color: transparent;
+}
+
 dialog {
   width: min(480px, calc(100% - 30px));
   border: 2px solid var(--ink);
@@ -292,7 +394,23 @@ dialog::backdrop {
   line-height: 1.45;
 }
 
+@media (max-width: 880px) {
+  .play-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-panel {
+    position: static;
+    order: -1;
+  }
+}
+
 @media (max-width: 560px) {
+  .setup-panel {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
   .controls {
     grid-template-columns: 1fr;
   }

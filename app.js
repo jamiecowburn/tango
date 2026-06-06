@@ -1,89 +1,205 @@
-const WORDS = [
-  {
-    topic: "pointing words: this",
-    answer: "これ",
-    english: "this",
-    level: "Beginner",
-    note: "A common word used for something near the speaker."
+const KANA_SETS = {
+  hiragana: {
+    label: "hiragana",
+    title: "Hiragana",
+    prompt: "Pick hiragana to build your guess.",
+    words: [
+      {
+        topic: "pointing words: this",
+        answer: "これ",
+        english: "this",
+        level: "Beginner",
+        note: "A common word used for something near the speaker."
+      },
+      {
+        topic: "pointing words: that",
+        answer: "それ",
+        english: "that",
+        level: "Beginner",
+        note: "A common word used for something near the listener."
+      },
+      {
+        topic: "question words: what",
+        answer: "なに",
+        english: "what",
+        level: "Beginner",
+        note: "Also pronounced なん in some phrases."
+      },
+      {
+        topic: "question words: who",
+        answer: "だれ",
+        english: "who",
+        level: "Beginner",
+        note: "A common question word for asking about people."
+      },
+      {
+        topic: "responses: yes",
+        answer: "はい",
+        english: "yes",
+        level: "Beginner",
+        note: "A common polite yes or acknowledgement."
+      },
+      {
+        topic: "responses: no",
+        answer: "いいえ",
+        english: "no",
+        level: "Beginner",
+        note: "A common polite no."
+      },
+      {
+        topic: "time words: not yet",
+        answer: "まだ",
+        english: "not yet",
+        level: "Intermediate",
+        note: "Can also mean still, depending on the sentence."
+      },
+      {
+        topic: "describing words: very",
+        answer: "とても",
+        english: "very",
+        level: "Intermediate",
+        note: "Often used before adjectives."
+      },
+      {
+        topic: "greetings: hello",
+        answer: "こんにちは",
+        english: "hello",
+        level: "Beginner",
+        note: "A daytime greeting. The final は is pronounced wa."
+      },
+      {
+        topic: "polite phrases: thank you",
+        answer: "ありがとう",
+        english: "thank you",
+        level: "Beginner",
+        note: "A common casual thank-you."
+      },
+      {
+        topic: "polite phrases: excuse me",
+        answer: "すみません",
+        english: "excuse me",
+        level: "Beginner",
+        note: "Also used for sorry or to get someone's attention."
+      }
+    ],
+    groups: [
+      { name: "Basic", kana: ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の"] },
+      { name: "More", kana: ["は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん"] },
+      { name: "Dakuten", kana: ["が", "ぎ", "ぐ", "げ", "ご", "ざ", "じ", "ず", "ぜ", "ぞ", "だ", "ぢ", "づ", "で", "ど", "ば", "び", "ぶ", "べ", "ぼ", "ぱ", "ぴ", "ぷ", "ぺ", "ぽ"] },
+      { name: "Small", kana: ["ゃ", "ゅ", "ょ", "っ", "ぁ", "ぃ", "ぅ", "ぇ", "ぉ"] }
+    ],
+    chart: [
+      ["あ a", "い i", "う u", "え e", "お o"],
+      ["か ka", "き ki", "く ku", "け ke", "こ ko"],
+      ["さ sa", "し shi", "す su", "せ se", "そ so"],
+      ["た ta", "ち chi", "つ tsu", "て te", "と to"],
+      ["な na", "に ni", "ぬ nu", "ね ne", "の no"],
+      ["は ha", "ひ hi", "ふ fu", "へ he", "ほ ho"],
+      ["ま ma", "み mi", "む mu", "め me", "も mo"],
+      ["や ya", "", "ゆ yu", "", "よ yo"],
+      ["ら ra", "り ri", "る ru", "れ re", "ろ ro"],
+      ["わ wa", "", "", "", "を wo"],
+      ["ん n", "", "", "", ""]
+    ]
   },
-  {
-    topic: "pointing words: that",
-    answer: "それ",
-    english: "that",
-    level: "Beginner",
-    note: "A common word used for something near the listener."
-  },
-  {
-    topic: "question words: what",
-    answer: "なに",
-    english: "what",
-    level: "Beginner",
-    note: "Also pronounced なん in some phrases."
-  },
-  {
-    topic: "question words: who",
-    answer: "だれ",
-    english: "who",
-    level: "Beginner",
-    note: "A common question word for asking about people."
-  },
-  {
-    topic: "responses: yes",
-    answer: "はい",
-    english: "yes",
-    level: "Beginner",
-    note: "A common polite yes or acknowledgement."
-  },
-  {
-    topic: "responses: no",
-    answer: "いいえ",
-    english: "no",
-    level: "Beginner",
-    note: "A common polite no."
-  },
-  {
-    topic: "time words: not yet",
-    answer: "まだ",
-    english: "not yet",
-    level: "Intermediate",
-    note: "Can also mean still, depending on the sentence."
-  },
-  {
-    topic: "describing words: very",
-    answer: "とても",
-    english: "very",
-    level: "Intermediate",
-    note: "Often used before adjectives."
-  },
-  {
-    topic: "greetings: hello",
-    answer: "こんにちは",
-    english: "hello",
-    level: "Beginner",
-    note: "A daytime greeting. The final は is pronounced wa."
-  },
-  {
-    topic: "polite phrases: thank you",
-    answer: "ありがとう",
-    english: "thank you",
-    level: "Beginner",
-    note: "A common casual thank-you."
-  },
-  {
-    topic: "polite phrases: excuse me",
-    answer: "すみません",
-    english: "excuse me",
-    level: "Beginner",
-    note: "Also used for sorry or to get someone's attention."
+  katakana: {
+    label: "katakana",
+    title: "Katakana",
+    prompt: "Pick katakana to build your guess.",
+    words: [
+      {
+        topic: "fast food: hamburger",
+        answer: "ハンバーガー",
+        english: "hamburger",
+        level: "Beginner",
+        note: "A borrowed English word often seen on menus."
+      },
+      {
+        topic: "fast food: pizza",
+        answer: "ピザ",
+        english: "pizza",
+        level: "Beginner",
+        note: "A short borrowed food word written in katakana."
+      },
+      {
+        topic: "drinks: coffee",
+        answer: "コーヒー",
+        english: "coffee",
+        level: "Beginner",
+        note: "The long sound mark ー stretches the vowel before it."
+      },
+      {
+        topic: "drinks: juice",
+        answer: "ジュース",
+        english: "juice",
+        level: "Beginner",
+        note: "ジュ combines ジ with small ュ."
+      },
+      {
+        topic: "clothing: shirt",
+        answer: "シャツ",
+        english: "shirt",
+        level: "Beginner",
+        note: "シャ combines シ with small ャ."
+      },
+      {
+        topic: "clothing: coat",
+        answer: "コート",
+        english: "coat",
+        level: "Beginner",
+        note: "Common clothing vocabulary written in katakana."
+      },
+      {
+        topic: "clothing: pants",
+        answer: "パンツ",
+        english: "pants",
+        level: "Beginner",
+        note: "A useful clothing word, especially in shopping topics."
+      },
+      {
+        topic: "food: curry",
+        answer: "カレー",
+        english: "curry",
+        level: "Beginner",
+        note: "A common food word in Japanese written in katakana."
+      },
+      {
+        topic: "dessert: ice cream",
+        answer: "アイス",
+        english: "ice cream",
+        level: "Beginner",
+        note: "A common shortened form of ice cream."
+      },
+      {
+        topic: "transport: taxi",
+        answer: "タクシー",
+        english: "taxi",
+        level: "Beginner",
+        note: "A borrowed transport word written in katakana."
+      }
+    ],
+    groups: [
+      { name: "Basic", kana: ["ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ"] },
+      { name: "More", kana: ["ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ヤ", "ユ", "ヨ", "ラ", "リ", "ル", "レ", "ロ", "ワ", "ヲ", "ン"] },
+      { name: "Dakuten", kana: ["ガ", "ギ", "グ", "ゲ", "ゴ", "ザ", "ジ", "ズ", "ゼ", "ゾ", "ダ", "ヂ", "ヅ", "デ", "ド", "バ", "ビ", "ブ", "ベ", "ボ", "パ", "ピ", "プ", "ペ", "ポ"] },
+      { name: "Small", kana: ["ャ", "ュ", "ョ", "ッ", "ァ", "ィ", "ゥ", "ェ", "ォ"] },
+      { name: "Marks", kana: ["ー"] }
+    ],
+    chart: [
+      ["ア a", "イ i", "ウ u", "エ e", "オ o"],
+      ["カ ka", "キ ki", "ク ku", "ケ ke", "コ ko"],
+      ["サ sa", "シ shi", "ス su", "セ se", "ソ so"],
+      ["タ ta", "チ chi", "ツ tsu", "テ te", "ト to"],
+      ["ナ na", "ニ ni", "ヌ nu", "ネ ne", "ノ no"],
+      ["ハ ha", "ヒ hi", "フ fu", "ヘ he", "ホ ho"],
+      ["マ ma", "ミ mi", "ム mu", "メ me", "モ mo"],
+      ["ヤ ya", "", "ユ yu", "", "ヨ yo"],
+      ["ラ ra", "リ ri", "ル ru", "レ re", "ロ ro"],
+      ["ワ wa", "", "", "", "ヲ wo"],
+      ["ン n", "ー long", "", "", ""]
+    ]
   }
-];
-
-const KANA_GROUPS = [
-  { name: "Basic", kana: ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の"] },
-  { name: "More", kana: ["は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん"] },
-  { name: "Dakuten", kana: ["が", "ぎ", "ぐ", "げ", "ご", "ざ", "じ", "ず", "ぜ", "ぞ", "だ", "ぢ", "づ", "で", "ど", "ば", "び", "ぶ", "べ", "ぼ", "ぱ", "ぴ", "ぷ", "ぺ", "ぽ"] },
-  { name: "Small", kana: ["ゃ", "ゅ", "ょ", "っ", "ぁ", "ぃ", "ぅ", "ぇ", "ぉ"] }
-];
+};
 
 const ATTEMPTS = 6;
 
@@ -91,18 +207,26 @@ const board = document.querySelector("#board");
 const topicText = document.querySelector("#topicText");
 const lengthText = document.querySelector("#lengthText");
 const levelText = document.querySelector("#levelText");
+const alphabetSelect = document.querySelector("#alphabetSelect");
+const topicSelect = document.querySelector("#topicSelect");
 const message = document.querySelector("#message");
 const selectedCellText = document.querySelector("#selectedCellText");
+const pickerLabel = document.querySelector("#pickerLabel");
 const kanaTabs = document.querySelector("#kanaTabs");
 const kanaGrid = document.querySelector("#kanaGrid");
+const chartToggle = document.querySelector("#chartToggle");
+const chartPanel = document.querySelector("#chartPanel");
+const chartTitle = document.querySelector("#chartTitle");
+const chartGrid = document.querySelector("#chartGrid");
 const submitButton = document.querySelector("#submitButton");
 const clearButton = document.querySelector("#clearButton");
 const newButton = document.querySelector("#newButton");
 const helpButton = document.querySelector("#helpButton");
 const helpDialog = document.querySelector("#helpDialog");
 
+let alphabet = "hiragana";
 let puzzleIndex = 0;
-let puzzle = WORDS[puzzleIndex];
+let puzzle = currentWords()[puzzleIndex];
 let currentRow = 0;
 let selectedCol = 0;
 let guesses = [];
@@ -110,27 +234,59 @@ let gameOver = false;
 let activeGroup = 0;
 let kanaStates = new Map();
 
+function currentSet() {
+  return KANA_SETS[alphabet];
+}
+
+function currentWords() {
+  return currentSet().words;
+}
+
 function characters(text) {
   return Array.from(text);
 }
 
-function newPuzzle(index = Math.floor(Math.random() * WORDS.length)) {
+function populateAlphabetSelect() {
+  alphabetSelect.innerHTML = "";
+  Object.entries(KANA_SETS).forEach(([key, set]) => {
+    const option = document.createElement("option");
+    option.value = key;
+    option.textContent = set.title;
+    alphabetSelect.append(option);
+  });
+}
+
+function populateTopicSelect() {
+  topicSelect.innerHTML = "";
+  currentWords().forEach((word, index) => {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = word.topic;
+    topicSelect.append(option);
+  });
+  topicSelect.value = String(puzzleIndex);
+}
+
+function newPuzzle(index = Math.floor(Math.random() * currentWords().length)) {
   puzzleIndex = index;
-  puzzle = WORDS[puzzleIndex];
+  puzzle = currentWords()[puzzleIndex];
   currentRow = 0;
   selectedCol = 0;
   guesses = Array.from({ length: ATTEMPTS }, () => Array(characters(puzzle.answer).length).fill(""));
   gameOver = false;
   kanaStates = new Map();
   render();
-  setMessage("Pick hiragana to build your guess.");
+  setMessage(currentSet().prompt);
 }
 
 function render() {
   const length = characters(puzzle.answer).length;
   topicText.textContent = puzzle.topic;
-  lengthText.textContent = `${length} hiragana`;
+  lengthText.textContent = `${length} ${currentSet().label}`;
   levelText.textContent = puzzle.level;
+  pickerLabel.textContent = `Choose ${currentSet().label}`;
+  topicSelect.value = String(puzzleIndex);
+  chartPanel.hidden = !chartToggle.checked;
   board.style.gridTemplateRows = `repeat(${ATTEMPTS}, 1fr)`;
   board.innerHTML = "";
 
@@ -158,12 +314,13 @@ function render() {
 
   renderTabs();
   renderKana();
+  renderChart();
   selectedCellText.textContent = gameOver ? "Round finished" : `Cell ${selectedCol + 1}`;
 }
 
 function renderTabs() {
   kanaTabs.innerHTML = "";
-  KANA_GROUPS.forEach((group, index) => {
+  currentSet().groups.forEach((group, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `tab ${index === activeGroup ? "active" : ""}`;
@@ -178,7 +335,7 @@ function renderTabs() {
 
 function renderKana() {
   kanaGrid.innerHTML = "";
-  KANA_GROUPS[activeGroup].kana.forEach((kana) => {
+  currentSet().groups[activeGroup].kana.forEach((kana) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "kana";
@@ -187,6 +344,17 @@ function renderKana() {
     if (state) button.classList.add(`used-${state}`);
     button.addEventListener("click", () => placeKana(kana));
     kanaGrid.append(button);
+  });
+}
+
+function renderChart() {
+  chartTitle.textContent = `${currentSet().title} chart`;
+  chartGrid.innerHTML = "";
+  currentSet().chart.flat().forEach((entry) => {
+    const cell = document.createElement("div");
+    cell.className = entry ? "chart-cell" : "chart-cell empty";
+    cell.textContent = entry;
+    chartGrid.append(cell);
   });
 }
 
@@ -263,9 +431,21 @@ function setMessage(text) {
   message.textContent = text;
 }
 
+populateAlphabetSelect();
+populateTopicSelect();
+
+alphabetSelect.addEventListener("change", () => {
+  alphabet = alphabetSelect.value;
+  puzzleIndex = 0;
+  activeGroup = 0;
+  populateTopicSelect();
+  newPuzzle(0);
+});
+topicSelect.addEventListener("change", () => newPuzzle(Number(topicSelect.value)));
+chartToggle.addEventListener("change", render);
 submitButton.addEventListener("click", submitGuess);
 clearButton.addEventListener("click", clearRow);
-newButton.addEventListener("click", () => newPuzzle((puzzleIndex + 1) % WORDS.length));
+newButton.addEventListener("click", () => newPuzzle((puzzleIndex + 1) % currentWords().length));
 helpButton.addEventListener("click", () => helpDialog.showModal());
 
 document.addEventListener("keydown", (event) => {
